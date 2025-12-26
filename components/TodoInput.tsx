@@ -18,7 +18,7 @@ const TodoInput = () => {
         await addTodo({ text: newTodo.trim() });
         setNewTodo('');
       } catch (err) {
-        console.log('Error adding Todo', err);
+        console.error('Error adding Todo', err);
         Alert.alert('Error', 'Failed to add todo');
       }
     }
@@ -33,11 +33,15 @@ const TodoInput = () => {
           onChangeText={setNewTodo}
           onSubmitEditing={handleAddTodo}
           placeholderTextColor={colors.textMuted}
+          accessibilityLabel="Todo input field"
+          returnKeyType="done"
         />
         <TouchableOpacity
           onPress={handleAddTodo}
           activeOpacity={0.8}
           disabled={!newTodo.trim()}
+          accessibilityLabel="Add todo"
+          accessibilityRole="button"
         >
           <LinearGradient
             colors={
