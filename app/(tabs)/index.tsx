@@ -14,9 +14,14 @@ export default function Index() {
       style={homeStyles.container}
     >
       <StatusBar barStyle={colors.statusBarStyle} />
-      <View style={homeStyles.container}>
+      <View>
         <Header />
-        <TouchableOpacity onPress={toggleDarkMode}>
+        <TouchableOpacity
+          onPress={toggleDarkMode}
+          accessibilityRole="button"
+          accessibilityLabel="Toggle theme"
+          accessibilityHint="Switches between light and dark theme"
+        >
           <Text>Toggle Theme</Text>
         </TouchableOpacity>
       </View>
