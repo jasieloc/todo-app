@@ -1,7 +1,6 @@
 import useTheme from '@/hooks/useTheme';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TabsLayout = () => {

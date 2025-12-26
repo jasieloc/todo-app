@@ -1,28 +1,25 @@
+import { createHomeStyles } from '@/assets/styles/home.styles';
+import Header from '@/components/Header';
 import useTheme from '@/hooks/useTheme';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar, Text, TouchableOpacity, View } from 'react-native';
 
 export default function Index() {
-  const { toggleDarkMode } = useTheme();
+  const { toggleDarkMode, colors } = useTheme();
+  const homeStyles = createHomeStyles(colors);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.content}>More React Native training</Text>
-      <TouchableOpacity onPress={toggleDarkMode}>
-        <Text>Toggle Theme</Text>
-      </TouchableOpacity>
-    </View>
+    <LinearGradient
+      colors={colors.gradients.background}
+      style={homeStyles.container}
+    >
+      <StatusBar barStyle={colors.statusBarStyle} />
+      <View style={homeStyles.container}>
+        <Header />
+        <TouchableOpacity onPress={toggleDarkMode}>
+          <Text>Toggle Theme</Text>
+        </TouchableOpacity>
+      </View>
+    </LinearGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  content: {
-    fontSize: 48,
-    fontWeight: 'bold',
-  },
-});
