@@ -1,50 +1,106 @@
-# Welcome to your Expo app 👋
+# Todo App 📝
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform todo application built with **Expo** and **Convex** for real-time data synchronization.
 
-## Get started
+## Tech Stack
 
-1. Install dependencies
+- **Frontend**: [Expo](https://expo.dev) with [Expo Router](https://docs.expo.dev/router/introduction) (file-based routing)
+- **Backend**: [Convex](https://convex.dev) (real-time backend)
+- **UI**: React Native with custom theming (light/dark mode)
+- **Navigation**: Tab-based navigation with `@react-navigation/bottom-tabs`
+
+## Features
+
+- ✅ Add, edit, and delete todos
+- ✅ Toggle todo completion status
+- ✅ Real-time sync across devices via Convex
+- ✅ Light/Dark mode theme support
+- ✅ Persistent theme preference with AsyncStorage
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18+)
+- npm or yarn
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- [Convex account](https://convex.dev)
+
+### Installation
+
+1. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. **Set up environment variables**
+
+   Create a `.env.local` file in the root directory:
+
+   ```bash
+   EXPO_PUBLIC_CONVEX_URL=your_convex_deployment_url
+   ```
+
+3. **Start the Convex development server**
+
+   ```bash
+   npx convex dev
+   ```
+
+4. **Start the Expo app**
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+### Running the App
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+After starting, you can open the app in:
+
+- [Expo Go](https://expo.dev/go) on your phone
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Web browser
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Project Structure
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+todo-app/
+├── app/                    # App screens (file-based routing)
+│   ├── (tabs)/             # Tab navigator screens
+│   │   ├── _layout.tsx     # Tab layout configuration
+│   │   ├── index.tsx       # Main todos screen
+│   │   └── settings.tsx    # Settings screen
+│   └── _layout.tsx         # Root layout with providers
+├── convex/                 # Convex backend
+│   ├── schema.ts           # Database schema
+│   └── todos.ts            # Todo mutations & queries
+├── hooks/                  # Custom React hooks
+│   └── useTheme.tsx        # Theme context & hook
+└── assets/                 # Static assets
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## API Reference
 
-## Learn more
+### Queries
 
-To learn more about developing your project with Expo, look at the following resources:
+| Function   | Description                               |
+| ---------- | ----------------------------------------- |
+| `getTodos` | Fetch all todos (ordered by newest first) |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Mutations
 
-## Join the community
+| Function         | Arguments                           | Description              |
+| ---------------- | ----------------------------------- | ------------------------ |
+| `addTodo`        | `{ text: string }`                  | Create a new todo        |
+| `toggleTodo`     | `{ id: Id<"todos"> }`               | Toggle completion status |
+| `updateTodo`     | `{ id: Id<"todos">, text: string }` | Update todo text         |
+| `deleteTodo`     | `{ id: Id<"todos"> }`               | Delete a single todo     |
+| `deleteAllTodos` | —                                   | Delete all todos         |
 
-Join our community of developers creating universal apps.
+## Learn More
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo Documentation](https://docs.expo.dev/)
+- [Convex Documentation](https://docs.convex.dev/)
+- [React Native Documentation](https://reactnative.dev/)
