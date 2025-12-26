@@ -8,15 +8,15 @@ const TabsLayout = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#1e293b' }}>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: 'tomato',
+          tabBarActiveTintColor: 'blue',
           tabBarInactiveTintColor: 'gray',
           tabBarStyle: {
             backgroundColor: 'black',
             borderTopWidth: 1,
             borderTopColor: 'gray',
-            height: 90,
-            paddingTop: 20,
-            paddingBottom: 20,
+            height: 70,
+            paddingTop: 7,
+            paddingBottom: 5,
           },
           tabBarLabelStyle: {
             fontSize: 12,
@@ -30,7 +30,11 @@ const TabsLayout = () => {
           options={{
             title: 'To-Dos',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="flash-outline" size={size} color={color} />
+              <Ionicons
+                name="checkmark-circle-outline"
+                size={size}
+                color={color}
+              />
             ),
           }}
         />
