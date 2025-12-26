@@ -102,9 +102,19 @@ const ThemeContext = createContext<undefined | ThemeContextType>(undefined);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   useEffect(() => {
-    AsyncStorage.getItem('darkMode').then((value) => {
-      if (value) setIsDarkMode(JSON.parse(value));
-    });
+    AsyncStorage.getItem('darkMode')
+      .then((value) => {
+        if (value != null) {
+          try {
+            setIsDarkMode(JSON.parse(value));
+          } catch {
+            // Invalid stored value, keep default
+          }
+        }
+      })
+      .catch(() => {
+        // Storage read failed, keep default
+      });
   }, []);
 
   const toggleDarkMode = async () => {

@@ -11,12 +11,10 @@ export default function RootLayout() {
           options={{
             ...(Platform.OS === 'android' && {
               androidNavigationBar: {
-                visible: true, // Make sure nav bar is visible for content to go behind
-                backgroundColor: '#000000', // Or your primary color
+                visible: true,
               },
-              // Make content draw behind the system bars
               contentStyle: {
-                paddingBottom: 0, // Let the tab bar handle its own space
+                paddingBottom: 0,
               },
             }),
           }}
