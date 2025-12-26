@@ -1,19 +1,21 @@
+import useTheme from '@/hooks/useTheme';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TabsLayout = () => {
+  const { colors } = useTheme();
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#1e293b' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface }}>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: 'blue',
-          tabBarInactiveTintColor: 'gray',
+          tabBarActiveTintColor: colors.primary,
+          tabBarInactiveTintColor: colors.textMuted,
           tabBarStyle: {
-            backgroundColor: 'black',
+            backgroundColor: colors.surface,
             borderTopWidth: 1,
-            borderTopColor: 'gray',
+            borderTopColor: colors.border,
             height: 70,
             paddingTop: 7,
             paddingBottom: 5,
