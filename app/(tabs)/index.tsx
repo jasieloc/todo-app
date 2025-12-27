@@ -118,7 +118,7 @@ export default function Index() {
         <TodoInput />
 
         <FlatList
-          data={[]}
+          data={todos}
           renderItem={renderTodoItem}
           keyExtractor={(item) => item._id}
           style={homeStyles.todoList}

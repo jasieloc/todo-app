@@ -10,10 +10,15 @@ const EmptyState = () => {
   const homeStyles = createHomeStyles(colors);
 
   return (
-    <View style={homeStyles.emptyContainer}>
+    <View
+      style={homeStyles.emptyContainer}
+      accessibilityRole="text"
+      accessibilityLabel="No todos yet. Add your first todo above to get started"
+    >
       <LinearGradient
         colors={colors.gradients.empty}
         style={homeStyles.emptyIconContainer}
+        accessibilityElementsHidden={true}
       >
         <Ionicons name="clipboard-outline" size={60} color={colors.textMuted} />
       </LinearGradient>
