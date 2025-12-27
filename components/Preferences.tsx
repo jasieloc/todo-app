@@ -1,8 +1,9 @@
 import { createSettingsStyles } from '@/assets/styles/settings.styles';
 import useTheme from '@/hooks/useTheme';
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Switch, Text, View } from 'react-native';
 
 const Preferences = () => {
@@ -10,6 +11,35 @@ const Preferences = () => {
   const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(true);
   const { isDarkMode, toggleDarkMode, colors } = useTheme();
   const settingsStyles = createSettingsStyles(colors);
+
+  // Load preferences on mount
+  useEffect(() => {
+    const loadPreferences = async () => {
+      try {
+        const autoSync = await AsyncStorage.getItem('autoSync');
+        const notifications = await AsyncStorage.getItem('notifications');
+        if (autoSync !== null) setIsAutoSync(JSON.parse(autoSync));
+        if (notifications !== null)
+          setIsNotificationsEnabled(JSON.parse(notifications));
+      } catch (error) {
+        console.error('Failed to load preferences:', error);
+      }
+    };
+    loadPreferences();
+  }, []);
+
+  // Save preferences when they change
+  useEffect(() => {
+    AsyncStorage.setItem('autoSync', JSON.stringify(isAutoSync));
+  }, [isAutoSync]);
+
+  useEffect(() => {
+    AsyncStorage.setItem(
+      'notifications',
+      JSON.stringify(isNotificationsEnabled)
+    );
+  }, [isNotificationsEnabled]);
+
   return (
     <LinearGradient
       colors={colors.gradients.surface}
