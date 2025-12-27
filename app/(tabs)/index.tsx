@@ -45,24 +45,29 @@ export default function Index() {
   };
 
   const handleDeleteTodo = async (id: Id<'todos'>) => {
-    try {
-      Alert.alert(
-        'Delete Todo?',
-        'Are you sure you want to delete this Todo?',
-        [
-          { text: 'Cancel', style: 'cancel' },
-          {
-            text: 'Delete',
-            style: 'destructive',
-            onPress: () => deleteTodo({ id }),
+    Alert.alert(
+      'Delete Todo?',
+      'Are you sure you want to delete this Todo?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await deleteTodo({ id });
+            } catch (err) {
+              console.error(err);
+              Alert.alert(
+                'Whoops',
+                'Something went wrong. Failed to delete todo.'
+              );
+            }
           },
-        ],
-        { cancelable: true }
-      );
-    } catch (err) {
-      console.error(err);
-      Alert.alert('Whoops', 'Something went wrong. Failed to delete todo.');
-    }
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   const handleEditTodo = (todo: Todo) => {
@@ -73,7 +78,7 @@ export default function Index() {
   const handleSaveEdit = async () => {
     if (editingId) {
       try {
-        await updateTodo({ id: editingId, text: editText });
+        await updateTodo({ id: editingId, text: editText.trim() });
         setEditingId(null);
         setEditText('');
       } catch (err) {
